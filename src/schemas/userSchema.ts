@@ -1,9 +1,12 @@
-import { Field, ObjectType, ID } from "type-graphql";
+import { ObjectId } from "mongoose";
+import { ObjectIdScalar } from "../myScalars/ObjectId";
+import { Field, ObjectType } from "type-graphql";
 
 @ObjectType()
 export class UserType {
-  @Field(() => ID)
-  _id!: String;
-  @Field()
-  name!: String;
+  @Field((type) => ObjectIdScalar)
+  readonly _id: ObjectId;
+
+  @Field((type) => String)
+  name: String;
 }
