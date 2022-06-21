@@ -1,6 +1,9 @@
 import { ObjectId } from "mongoose";
 import { ObjectIdScalar } from "../myScalars/ObjectId";
-import { Field, ObjectType } from "type-graphql";
+import { Arg, Field, ObjectType, Root } from "type-graphql";
+import { RecordType } from "./recordSchema";
+import { DocumentType } from "@typegoose/typegoose";
+import RecordModel from "../models/RecordModel";
 
 @ObjectType()
 export class UserType {
@@ -15,6 +18,12 @@ export class UserType {
 
   @Field((type) => String)
   name: String;
+
+  // @Prop({ type: () => RecordType })
+  @Field((type) => UserType, { nullable: true })
+  async userRecord(@Root() user: DocumentType<RecordType | null>) {
+    return await RecordModel.findOne({ userId: user._id });
+  }
 }
 
 @ObjectType()
