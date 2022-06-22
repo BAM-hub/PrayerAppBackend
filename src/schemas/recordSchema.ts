@@ -4,11 +4,11 @@ import { Field, ObjectType, registerEnumType } from "type-graphql";
 
 export enum Prayers {
   None = 0,
-  Dawn = 10,
-  Aduher = 5,
+  Dawn = 1,
+  Aduher = 2,
   Asr = 3,
   Maghreb = 4,
-  Eshaa = 6,
+  Eshaa = 5,
   //   Sunnah=2
 }
 
