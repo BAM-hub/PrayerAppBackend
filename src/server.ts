@@ -3,7 +3,11 @@ import * as express from "express";
 import { graphqlHTTP } from "express-graphql";
 import { buildSchema } from "type-graphql";
 
-import { RecordResolver } from "./resolvers/RecoerdResolver";
+import {
+  CheckNuaffel,
+  RecordResolver,
+  CheckPrayer,
+} from "./resolvers/RecoerdResolver";
 import { UserResolver } from "./resolvers/userResolver";
 import connectDB from "./config/db";
 
@@ -13,7 +17,7 @@ connectDB();
 
 const main = async () => {
   const schema = await buildSchema({
-    resolvers: [UserResolver, RecordResolver],
+    resolvers: [UserResolver, RecordResolver, CheckNuaffel, CheckPrayer],
   });
   app.use(
     "/graphql",
